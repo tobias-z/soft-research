@@ -14,9 +14,8 @@ pub extern "system" fn Java_com_groupawesome_example_rustlib_Sort_bubbleSort<'lo
     arr: JIntArray<'local>,
 ) {
     unsafe {
-        let mut mut_arr = env
-            .get_array_elements(&arr, jni::objects::ReleaseMode::CopyBack)
-            .unwrap();
-        sort::bubble_sort(&mut mut_arr);
+        if let Ok(mut arr) = env.get_array_elements(&arr, jni::objects::ReleaseMode::CopyBack) {
+            sort::bubble_sort(&mut arr);
+        }
     }
 }
