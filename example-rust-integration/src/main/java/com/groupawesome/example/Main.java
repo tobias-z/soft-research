@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
         int[] arr = {1, 2, 4, 2, 1};
-        arr = Sort.bubbleSort(arr);
+        Sort.bubbleSort(arr);
         System.out.println(Arrays.toString(arr));
     }
 }
