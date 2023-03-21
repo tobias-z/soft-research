@@ -31,6 +31,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "glob"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d2fabcfbdc87f4758337ca535fb41a6d701b65693ce38287d856d1674551ec9b"
+
+[[package]]
+name = "java-locator"
+version = "0.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "72cb7c9d00a642469deceff95ca37d0da9ce72d7f8b863edbebdf0aac75093da"
+dependencies = [
+ "glob",
+ "lazy_static",
+]
+
+[[package]]
 name = "jni"
 version = "0.21.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -39,7 +55,9 @@ dependencies = [
  "cesu8",
  "cfg-if",
  "combine",
+ "java-locator",
  "jni-sys",
+ "libloading",
  "log",
  "thiserror",
  "walkdir",
@@ -53,10 +71,27 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8eaf4bc02d17cbdd7ff4c7438cafcdf7fb9a4613313ad11b4f8fefe7d3fa0130"
 
 [[package]]
+name = "lazy_static"
+version = "1.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
+
+[[package]]
 name = "lib-rust"
 version = "0.1.0"
 dependencies = [
  "jni",
+ "lazy_static",
+]
+
+[[package]]
+name = "libloading"
+version = "0.7.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b67380fd3b2fbe7527a606e18729d21c6f3951633d0500574c4dc22d2d638b9f"
+dependencies = [
+ "cfg-if",
+ "winapi",
 ]
 
 [[package]]
@@ -103,9 +138,9 @@ dependencies = [
 
 [[package]]
 name = "syn"
-version = "2.0.2"
+version = "2.0.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "59d3276aee1fa0c33612917969b5172b5be2db051232a6e4826f1a1a9191b045"
+checksum = "2c622ae390c9302e214c31013517c2061ecb2699935882c60a9b37f82f8625ae"
 dependencies = [
  "proc-macro2",
  "quote",
