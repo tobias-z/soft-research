@@ -32,16 +32,50 @@ mod merge_sort {
     }
 
     fn merge(arr: &mut AutoElements<i32>, l: usize, m: usize, r: usize) {
-        let mut left: Vec<i32> = vec![0; m - l + 1];
-        let mut right: Vec<i32> = vec![0; r - m];
-        for i in 0..(m - l + 1) {
+        let left_amount = m - l + 1;
+        let right_amount = r - m;
+        let mut left: Vec<i32> = vec![0; left_amount];
+        let mut right: Vec<i32> = vec![0; right_amount];
+        for i in 0..(left_amount) {
             left[i] = arr[l + i];
         }
-        for i in 0..(r - m) {
+        for i in 0..right_amount {
             right[i] = arr[m + 1 + i];
         }
-        // Merge the vectors where the smaller ones goes in front
-        println!("left: {:?}, right: {:?}", left, right);
+
+        // keep checking against left vs right.
+        // if one is smaller we swap them and increment the counter for the found side
+        let mut r_index = 0;
+        let mut l_index = 0;
+        let mut curr_index = l;
+        let mut x = 0;
+        while r_index < right_amount && l_index < left_amount {
+            if left[l_index] <= right[r_index] {
+                arr[curr_index] = left[l_index];
+                l_index += 1;
+            } else {
+                arr[curr_index] = right[r_index];
+                r_index += 1;
+            }
+            curr_index += 1;
+            x += 1;
+            if x == 1000 {
+                break;
+            }
+        }
+
+        // insert the remaining from left and right
+        while l_index < left_amount {
+            arr[curr_index]= left[l_index];
+            l_index += 1;
+            curr_index += 1;
+        }
+
+        while r_index < right_amount {
+            arr[curr_index]= right[r_index];
+            r_index += 1;
+            curr_index += 1;
+        }
     }
 }
 

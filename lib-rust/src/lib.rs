@@ -3,8 +3,7 @@
 pub mod sort;
 
 use jni::{
-    errors::Result,
-    objects::{JClass, JIntArray, JPrimitiveArray},
+    objects::{JClass, JIntArray},
     JNIEnv,
 };
 
