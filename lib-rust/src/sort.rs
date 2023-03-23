@@ -1,9 +1,9 @@
-use jni::objects::AutoElements;
+use jni::objects::AutoElementsCritical;
 
 // TODO: Ensure that we are doing bubble sort the most optimally
-pub fn bubble_sort(arr: &mut AutoElements<i32>) {
-    for i in 0..arr.len() {
-        for j in 0..arr.len() - 1 - i {
+pub fn bubble_sort(arr: &mut AutoElementsCritical<i32>) {
+    for _ in 0..arr.len() {
+        for j in 0..arr.len() - 1 {
             if arr[j] > arr[j + 1] {
                 let curr = arr[j];
                 let prev = arr[j + 1];
@@ -14,7 +14,7 @@ pub fn bubble_sort(arr: &mut AutoElements<i32>) {
     }
 }
 
-pub fn merge_sort(arr: &mut AutoElements<i32>) {
+pub fn merge_sort(arr: &mut AutoElementsCritical<i32>) {
     merge_sort::sort(arr, 0, (arr.len() - 1) as isize)
 }
 
@@ -26,9 +26,9 @@ pub unsafe fn merge_sort_ptr_arithmatic(arr: *mut i32, length: i32) {
 }
 
 mod merge_sort {
-    use jni::objects::AutoElements;
+    use jni::objects::AutoElementsCritical;
 
-    pub fn sort(arr: &mut AutoElements<i32>, left: isize, right: isize) {
+    pub fn sort(arr: &mut AutoElementsCritical<i32>, left: isize, right: isize) {
         if left >= right {
             return;
         }
@@ -38,7 +38,7 @@ mod merge_sort {
         merge(arr, left as usize, middle as usize, right as usize)
     }
 
-    fn merge(arr: &mut AutoElements<i32>, l: usize, m: usize, r: usize) {
+    fn merge(arr: &mut AutoElementsCritical<i32>, l: usize, m: usize, r: usize) {
         let left_amount = m - l + 1;
         let right_amount = r - m;
         let mut left: Vec<i32> = vec![0; left_amount];
@@ -85,7 +85,6 @@ mod merge_sort {
             return;
         }
         let middle = left + (right - left) / 2;
-        println!("left: {}, m: {}, r: {}", left, middle, right);
         sort_ptr_arithmatic(arr, left, middle);
         sort_ptr_arithmatic(arr, middle + 1, right);
         merge_ptr_arithmatic(arr, left as usize, middle as usize, right as usize);
@@ -123,10 +122,10 @@ mod merge_sort {
         for i in 0..4 {
             s.push_str(format!("{}, ", *arr.add(i)).as_str());
         }
-        println!("[{}]", s);
+        // println!("[{}]", s);
 
         while l_index < left_amount {
-            println!("left: {}, i: {}", left[l_index], l_index);
+            // println!("left: {}, i: {}", left[l_index], l_index);
             let curr = arr.add(curr_index);
             *curr = left[l_index];
             l_index += 1;
@@ -134,7 +133,7 @@ mod merge_sort {
         }
 
         while r_index < right_amount {
-            println!("right: {}, i: {}", right[r_index], curr_index);
+            // println!("right: {}, i: {}", right[r_index], curr_index);
             let curr = arr.add(curr_index);
             *curr = right[r_index];
             r_index += 1;
@@ -180,11 +179,11 @@ mod test {
         test_sort_even_numbers(merge_sort)
     }
 
-    fn test_sort_odd_numbers(sort: fn(&mut AutoElements<i32>)) {
+    fn test_sort_odd_numbers(sort: fn(&mut AutoElementsCritical<i32>)) {
         let mut env = VM.attach_current_thread_as_daemon().unwrap();
         if let Ok(arr) = env.new_int_array(5) {
             unsafe {
-                if let Ok(mut arr) = env.get_array_elements(&arr, ReleaseMode::NoCopyBack) {
+                if let Ok(mut arr) = env.get_array_elements_critical(&arr, ReleaseMode::NoCopyBack) {
                     arr[0] = 5;
                     arr[1] = 2;
                     arr[2] = 10;
@@ -199,11 +198,11 @@ mod test {
         }
     }
 
-    fn test_sort_even_numbers(sort: fn(&mut AutoElements<i32>)) {
+    fn test_sort_even_numbers(sort: fn(&mut AutoElementsCritical<i32>)) {
         let mut env = VM.attach_current_thread_as_daemon().unwrap();
         if let Ok(arr) = env.new_int_array(4) {
             unsafe {
-                if let Ok(mut arr) = env.get_array_elements(&arr, ReleaseMode::NoCopyBack) {
+                if let Ok(mut arr) = env.get_array_elements_critical(&arr, ReleaseMode::NoCopyBack) {
                     arr[0] = 5;
                     arr[1] = 2;
                     arr[2] = 10;

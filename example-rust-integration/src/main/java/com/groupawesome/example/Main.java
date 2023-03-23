@@ -16,11 +16,10 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        System.out.println(time(Main::sortWithRustBubbleSort));
+        System.out.println(time(Main::sortWithJavaBubbleSort));
+        System.out.println(time(Main::sortWithBuiltIn));
         System.out.println(time(Main::sortWithRustMergeSort));
-        System.out.println(time(Main::sortWithRustMergeSortPointerArithmetic));
-//        System.out.println(time(Main::sortWithRustBubbleSort));
-//        System.out.println(time(Main::sortWithJavaBubbleSort));
-//        System.out.println(time(Main::sortWithBuiltIn));
     }
 
     private static void bubbleSort(int[] arr) {
@@ -36,15 +35,15 @@ public class Main {
     }
 
     private static void sortWithRustMergeSort() {
-        int[] arr = new int[] {10, 0, 100, 0};
+//        int[] arr = new int[] {10, 0, 100, 0};
+        int[] arr = getArrOfSize(1000000);
         Sort.mergeSort(arr);
-        System.out.println(Arrays.toString(arr));
     }
 
     private static void sortWithRustMergeSortPointerArithmetic() {
-        int[] arr = new int[] {10, 0, 100, 0};
+//        int[] arr = new int[] {10, 0, 100, 0};
+        int[] arr = getArrOfSize(1000000);
         Sort.mergeSortWithArithmatic(arr);
-        System.out.println(Arrays.toString(arr));
     }
 
     private static void sortWithRustBubbleSort() {
@@ -53,7 +52,12 @@ public class Main {
     }
 
     private static void sortWithBuiltIn() {
-        int[] arr = getArrOfSize(1_000_000);
+//        int[] arr = getArrOfSize(1000000);
+        Integer[] arr = new Integer[1000000];
+        Random random = new Random();
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = random.nextInt();
+        }
         Arrays.sort(arr);
     }
 
