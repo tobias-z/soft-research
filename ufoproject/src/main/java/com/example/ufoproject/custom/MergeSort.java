@@ -2,6 +2,8 @@ package com.example.ufoproject.custom;
 
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+
 //https://howtodoinjava.com/algorithm/merge-sort-java-example/
 @Component
 public class MergeSort {
@@ -12,7 +14,7 @@ public class MergeSort {
         if(low < high) {
             int mid = (low + high) / 2;
             mergeSort(arr, low, mid);
-            mergeSort(arr, (mid + 1), high);
+            mergeSort(arr, mid + 1, high);
             merge(arr, low, mid, high);
         }
     }
@@ -25,7 +27,7 @@ public class MergeSort {
         int[] _HIGH = new int[midHigh];
 
         for(int i = 0; i < lowMid; i++) {
-            _LOW[i] = arr[lowMid + i];
+            _LOW[i] = arr[low + i];
         }
 
         for(int j = 0; j < midHigh; j++) {
