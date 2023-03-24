@@ -35,5 +35,5 @@ jobs:
         if: ${{ github.event_name != 'pull_request' }}
         run: |
           echo "$DOCKER_PASSWORD" | docker login --username $DOCKER_USERNAME --password-stdin
-          docker build --tag "research-project:latest" .
-          docker push "research-project:latest"
+          docker build --tag "$DOCKER_USERNAME/research-project:latest" .
+          docker push "$DOCKER_USERNAME/research-project:latest"
