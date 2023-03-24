@@ -11,7 +11,7 @@ use jni::{
 };
 
 #[no_mangle]
-pub extern "system" fn Java_com_groupawesome_example_rustlib_Sort_bubbleSort<'local>(
+pub extern "system" fn Java_com_example_ufoproject_rust_RustSort_bubbleSort<'local>(
     mut env: JNIEnv<'local>,
     _jclass: JClass,
     arr: JIntArray<'local>,
@@ -24,7 +24,7 @@ pub extern "system" fn Java_com_groupawesome_example_rustlib_Sort_bubbleSort<'lo
 }
 
 #[no_mangle]
-pub extern "system" fn Java_com_groupawesome_example_rustlib_Sort_mergeSort<'local>(
+pub extern "system" fn Java_com_example_ufoproject_rust_RustSort_mergeSort<'local>(
     mut env: JNIEnv<'local>,
     _jclass: JClass,
     arr: JIntArray<'local>,
@@ -37,7 +37,7 @@ pub extern "system" fn Java_com_groupawesome_example_rustlib_Sort_mergeSort<'loc
 }
 
 #[no_mangle]
-pub extern "system" fn Java_com_groupawesome_example_rustlib_Sort_mergeSortWithArithmatic<
+pub extern "system" fn Java_com_example_ufoproject_rust_RustSort_sortWithArithmetic<
     'local,
 >(
     env: JNIEnv<'local>,
