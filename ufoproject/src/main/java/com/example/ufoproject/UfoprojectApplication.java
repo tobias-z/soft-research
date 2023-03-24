@@ -9,5 +9,4 @@ public class UfoprojectApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(UfoprojectApplication.class, args);
 	}
-
 }
