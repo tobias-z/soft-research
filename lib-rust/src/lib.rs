@@ -37,6 +37,17 @@ pub extern "system" fn Java_com_example_ufoproject_rust_RustSort_mergeSort<'loca
 }
 
 #[no_mangle]
+pub extern "system" fn Java_com_example_ufoproject_rust_RustBinarySearchTree_binarySearch<'local>(
+    mut env: JNIEnv<'local>,
+    _jclass: JClass,
+    sorted_arr: JIntArray<'local>,
+    numbers_to_find: JIntArray<'local>,
+) -> JIntArray<'local> {
+    println!("hello world");
+    sorted_arr
+}
+
+#[no_mangle]
 pub extern "system" fn Java_com_example_ufoproject_rust_RustSort_sortWithArithmetic<
     'local,
 >(
