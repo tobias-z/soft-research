@@ -59,13 +59,11 @@ impl BinarySearchTree {
         let middle = left + (right - left) / 2;
         let index = middle as usize;
         let data = sorted_arr[index];
-        let left_node = BinarySearchTree::create_node(sorted_arr, left, middle - 1);
-        let right_node = BinarySearchTree::create_node(sorted_arr, middle + 1, right);
         Node::Data(NodeData {
             data,
             index: index as i32,
-            left: Box::new(left_node),
-            rigth: Box::new(right_node),
+            left: Box::new(BinarySearchTree::create_node(sorted_arr, left, middle - 1)),
+            rigth: Box::new(BinarySearchTree::create_node(sorted_arr, middle + 1, right)),
         })
     }
 }
