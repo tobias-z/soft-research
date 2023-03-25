@@ -11,7 +11,6 @@ pub fn search_multiple(
         .collect()
 }
 
-#[derive(Debug)]
 struct NodeData {
     pub data: i32,
     pub left: Box<Node>,
@@ -19,7 +18,6 @@ struct NodeData {
     pub index: i32,
 }
 
-#[derive(Debug)]
 enum Node {
     Data(NodeData),
     None,
