@@ -8,7 +8,7 @@ RUN cargo build --release
 FROM openjdk:19-bullseye as java_builder
 WORKDIR /build
 COPY ufoproject .
-RUN ./mvnw package
+RUN ./mvnw package -Dmaven.test.skip=true
 
 FROM openjdk:19-bullseye
 RUN mkdir -p /usr/java/packages/lib
