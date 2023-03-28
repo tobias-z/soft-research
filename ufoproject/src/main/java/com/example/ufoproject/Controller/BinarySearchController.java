@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
 @RestController
 @RequestMapping("/search")
 public class BinarySearchController {
@@ -28,6 +32,12 @@ public class BinarySearchController {
     public SearchResponse rustBinarySearch(@RequestBody SearchRequest searchRequest) {
         int[] indexes = RustBinarySearchTree.binarySearch(searchRequest.sortedArray(), searchRequest.numbersToFind());
         return new SearchResponse(indexes);
+    }
+
+    @GetMapping("/built-in-binary-search")
+    public int builtInBinarySearch(int[] sortedArray, int numberToFind) {
+        int index = Arrays.binarySearch(sortedArray, numberToFind);
+        return index;
     }
 
 }
