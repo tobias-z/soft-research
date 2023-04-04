@@ -3,6 +3,7 @@ package com.example.ufoproject.Controller;
 import com.example.ufoproject.custom.binarySearchTree.BinaryTreeCustom;
 import com.example.ufoproject.rust.RustBinarySearchTree;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -28,9 +29,9 @@ public class BinarySearchController {
     }
 
     @GetMapping("/rust-binary-search")
-    public SearchResponse rustBinarySearch(@RequestBody SearchRequest searchRequest) {
+    public ResponseEntity<SearchResponse> rustBinarySearch(@RequestBody SearchRequest searchRequest) {
         int[] indexes = RustBinarySearchTree.binarySearch(searchRequest.sortedArray(), searchRequest.numbersToFind());
-        return new SearchResponse(indexes);
+        return SortController.noValidateResponse(new SearchResponse(indexes));
     }
 
     @GetMapping("/built-in-binary-search")
@@ -40,11 +41,11 @@ public class BinarySearchController {
     }
 
     @GetMapping("/custom-binary-search")
-    public SearchResponse customBinarySearch(@RequestBody SearchRequest searchRequest) {
+    public ResponseEntity<SearchResponse> customBinarySearch(@RequestBody SearchRequest searchRequest) {
         // int[] sortedArray = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25};
         // int numberToFind = 10;
         BinaryTreeCustom.root = binaryTreeCustom.sortedArrayToBalancedTree(searchRequest.sortedArray, 0, searchRequest.sortedArray.length - 1);
-        return new SearchResponse(binaryTreeCustom.searchArr(BinaryTreeCustom.root, searchRequest.numbersToFind));
+        return SortController.noValidateResponse(new SearchResponse(binaryTreeCustom.searchArr(BinaryTreeCustom.root, searchRequest.numbersToFind)));
     }
 
 }
