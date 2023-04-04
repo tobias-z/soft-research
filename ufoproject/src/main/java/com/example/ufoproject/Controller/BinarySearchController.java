@@ -35,9 +35,13 @@ public class BinarySearchController {
     }
 
     @GetMapping("/built-in-binary-search")
-    public int builtInBinarySearch(int[] sortedArray, int numberToFind) {
-        int index = Arrays.binarySearch(sortedArray, numberToFind);
-        return index;
+    public SearchResponse builtInBinarySearch(@RequestBody SearchRequest searchRequest) {
+        int[] indexes = new int[searchRequest.numbersToFind.length];
+        for (int i = 0; i < searchRequest.numbersToFind.length; i++) {
+            int index = Arrays.binarySearch(searchRequest.sortedArray(), searchRequest.numbersToFind[i]);
+            indexes[i] = index;
+        }
+        return new SearchResponse(indexes);
     }
 
     @GetMapping("/custom-binary-search")
