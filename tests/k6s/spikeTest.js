@@ -28,7 +28,7 @@ function parse(text) {
 }
 
 export default () => {
-    http.post(`http://142.93.107.93:8080/${__ENV.TARGET}`, JSON.stringify(body), {
+    http.post(`http://142.93.107.93:8080${__ENV.TARGET}`, JSON.stringify(body), {
         headers: { 'Content-type': 'application/json' },
     });
     sleep(1);
