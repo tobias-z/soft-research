@@ -35,13 +35,13 @@ public class BinarySearchController {
     }
 
     @GetMapping("/built-in-binary-search")
-    public SearchResponse builtInBinarySearch(@RequestBody SearchRequest searchRequest) {
+    public ResponseEntity<SearchResponse> builtInBinarySearch(@RequestBody SearchRequest searchRequest) {
         int[] indexes = new int[searchRequest.numbersToFind.length];
         for (int i = 0; i < searchRequest.numbersToFind.length; i++) {
             int index = Arrays.binarySearch(searchRequest.sortedArray(), searchRequest.numbersToFind[i]);
             indexes[i] = index;
         }
-        return new SearchResponse(indexes);
+        return SortController.noValidateResponse(new SearchResponse(indexes));
     }
 
     @GetMapping("/custom-binary-search")
