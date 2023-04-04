@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+nums=$1
+
+# Generate a list of one million random numbers between -999,999 and 999,999
+# Half of the numbers will be negative and half will be positive
+shuf -i 0-10000000 -n $nums | awk '{printf("%d\n", $0 * ((rand() > 0.5) ? 1 : -1))}' > $HOME/documents/$2.txt
+
+echo "Random numbers saved"

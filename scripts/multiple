@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+
+for name in 1000 10000 100000 5000 50000 500000; do
+    sh scripts/nums $name $name
+done
