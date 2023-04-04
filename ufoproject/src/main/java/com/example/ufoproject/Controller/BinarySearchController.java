@@ -28,13 +28,13 @@ public class BinarySearchController {
 
     }
 
-    @GetMapping("/rust-binary-search")
+    @PostMapping("/rust-binary-search")
     public ResponseEntity<SearchResponse> rustBinarySearch(@RequestBody SearchRequest searchRequest) {
         int[] indexes = RustBinarySearchTree.binarySearch(searchRequest.sortedArray(), searchRequest.numbersToFind());
         return SortController.mustRevalidateResponse(new SearchResponse(indexes));
     }
 
-    @GetMapping("/built-in-binary-search")
+    @PostMapping("/built-in-binary-search")
     public ResponseEntity<SearchResponse> builtInBinarySearch(@RequestBody SearchRequest searchRequest) {
         int[] indexes = new int[searchRequest.numbersToFind.length];
         for (int i = 0; i < searchRequest.numbersToFind.length; i++) {
@@ -44,7 +44,7 @@ public class BinarySearchController {
         return SortController.mustRevalidateResponse(new SearchResponse(indexes));
     }
 
-    @GetMapping("/custom-binary-search")
+    @PostMapping("/custom-binary-search")
     public ResponseEntity<SearchResponse> customBinarySearch(@RequestBody SearchRequest searchRequest) {
         // int[] sortedArray = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25};
         // int numberToFind = 10;

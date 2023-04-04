@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,31 +29,31 @@ public class SortController {
             .body(data);
     }
 
-    @GetMapping("/buildin-java-sort")
+    @PostMapping("/buildin-java-sort")
     public ResponseEntity<int[]> buildInJavaSort(@RequestBody int[] arr) {
         Arrays.sort(arr);
         return mustRevalidateResponse(arr);
     }
 
-    @GetMapping("/java-bubble-sort")
+    @PostMapping("/java-bubble-sort")
     public ResponseEntity<int[]> javaBubbleSort(@RequestBody int[] arr) {
         javaBubbleSort.bubbleSort(arr);
         return mustRevalidateResponse(arr);
     }
 
-    @GetMapping("/java-merge-sort")
+    @PostMapping("/java-merge-sort")
     public ResponseEntity<int[]> javaMergeSort(@RequestBody int[] arr) {
         javaMergeSort.mergeSort(arr, 0, arr.length - 1);
         return mustRevalidateResponse(arr);
     }
 
-    @GetMapping("/rust-merge-sort")
+    @PostMapping("/rust-merge-sort")
     public ResponseEntity<int[]> rustMergeSort(@RequestBody int[] arr) {
         RustSort.mergeSort(arr);
         return mustRevalidateResponse(arr);
     }
 
-    @GetMapping("/rust-bubble-sort")
+    @PostMapping("/rust-bubble-sort")
     public ResponseEntity<int[]> rustBubbleSort(@RequestBody int[] arr) {
         RustSort.bubbleSort(arr);
         return mustRevalidateResponse(arr);
