@@ -22,7 +22,7 @@ public class SortController {
     @Autowired
     private MergeSort javaMergeSort;
 
-    public static <T> ResponseEntity<T> noValidateResponse(T data) {
+    public static <T> ResponseEntity<T> mustRevalidateResponse(T data) {
         return ResponseEntity.ok()
             .cacheControl(CacheControl.maxAge(0, TimeUnit.SECONDS).mustRevalidate().cachePrivate())
             .body(data);
@@ -31,30 +31,30 @@ public class SortController {
     @GetMapping("/buildin-java-sort")
     public ResponseEntity<int[]> buildInJavaSort(@RequestBody int[] arr) {
         Arrays.sort(arr);
-        return noValidateResponse(arr);
+        return mustRevalidateResponse(arr);
     }
 
     @GetMapping("/java-bubble-sort")
     public ResponseEntity<int[]> javaBubbleSort(@RequestBody int[] arr) {
         javaBubbleSort.bubbleSort(arr);
-        return noValidateResponse(arr);
+        return mustRevalidateResponse(arr);
     }
 
     @GetMapping("/java-merge-sort")
     public ResponseEntity<int[]> javaMergeSort(@RequestBody int[] arr) {
         javaMergeSort.mergeSort(arr, 0, arr.length - 1);
-        return noValidateResponse(arr);
+        return mustRevalidateResponse(arr);
     }
 
     @GetMapping("/rust-merge-sort")
     public ResponseEntity<int[]> rustMergeSort(@RequestBody int[] arr) {
         RustSort.mergeSort(arr);
-        return noValidateResponse(arr);
+        return mustRevalidateResponse(arr);
     }
 
     @GetMapping("/rust-bubble-sort")
     public ResponseEntity<int[]> rustBubbleSort(@RequestBody int[] arr) {
         RustSort.bubbleSort(arr);
-        return noValidateResponse(arr);
+        return mustRevalidateResponse(arr);
     }
 }
