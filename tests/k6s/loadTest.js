@@ -16,7 +16,7 @@ export let options = {
 }
 
 const body = new SharedArray('some name', function() {
-    return parse(open(`/${__ENV.HOME}/tests/documents/unsorted/${__ENV.TEST_AMOUNT}.txt`));
+    return parse(open(`/${__ENV.HOME}/tests/documents/${__ENV.TEST_AMOUNT}.txt`));
 });
 
 function parse(text) {
