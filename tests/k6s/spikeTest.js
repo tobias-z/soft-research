@@ -27,6 +27,8 @@ function parse(text) {
     return text.split("\n").map(Number);
 }
 
+console.log(`Starting spike test with ENV: ${__ENV} at: ${new Date()}`)
+
 export default () => {
     http.post(`http://142.93.107.93:8080${__ENV.TARGET}`, JSON.stringify(body), {
         headers: { 'Content-type': 'application/json' },
@@ -36,5 +38,5 @@ export default () => {
 
 // This function will only run if the test was successful
 export function teardown() {
-    console.log('teardown will still be called after test.abort()');
+    console.log(`Finished spike test with ENV: ${__ENV} at: ${new Date()}`)
 }
