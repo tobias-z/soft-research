@@ -23,7 +23,7 @@ function parse(text) {
     return text.split("\n").map(Number);
 }
 
-console.log(`Starting load test with ENV: ${__ENV} at: ${new Date()}`)
+console.log(`Starting load test with ENV: ${JSON.stringify(__ENV, null, 2)} at: ${new Date()}`)
 
 export default () => {
     http.post(`http://142.93.107.93:8080${__ENV.TARGET}`, JSON.stringify(body), {
@@ -33,5 +33,5 @@ export default () => {
 }
 
 export function teardown() {
-    console.log(`Finished load test with ENV: ${__ENV} at: ${new Date()}`)
+    console.log(`Finished load test with ENV: ${JSON.stringify(__ENV, null, 2)} at: ${new Date()}`)
 }

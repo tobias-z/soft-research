@@ -29,7 +29,7 @@ function parse(text) {
     return text.split("\n").map(Number);
 }
 
-console.log(`Starting stress test with ENV: ${__ENV} at: ${new Date()}`)
+console.log(`Starting spike test with ENV: ${JSON.stringify(__ENV, null, 2)} at: ${new Date()}`)
 
 export default () => {
     http.post(`http://142.93.107.93:8080/sort${__ENV.TARGET}`, JSON.stringify(body), {
@@ -40,5 +40,5 @@ export default () => {
 
 // This function will only run if the test was successful
 export function teardown() {
-    console.log(`Starting stress test with ENV: ${__ENV} at: ${new Date()}`)
+    console.log(`Finished stress test with ENV: ${JSON.stringify(__ENV, null, 2)} at: ${new Date()}`)
 }
