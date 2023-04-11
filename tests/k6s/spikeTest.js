@@ -20,12 +20,14 @@ export let options = {
 }
 
 const body = new SharedArray('some name', function() {
-    return parse(open(`/${__ENV.HOME}/tests/documents/unsorted/${__ENV.TEST_AMOUNT}.txt`));
+    return parse(open(`/${__ENV.HOME}/tests/documents/${__ENV.TEST_AMOUNT}.txt`));
 });
 
 function parse(text) {
     return text.split("\n").map(Number);
 }
+
+console.log(`Starting spike test with ENV: ${JSON.stringify(__ENV, null, 2)} at: ${new Date()}`)
 
 export default () => {
     http.post(`http://142.93.107.93:8080${__ENV.TARGET}`, JSON.stringify(body), {
@@ -36,5 +38,5 @@ export default () => {
 
 // This function will only run if the test was successful
 export function teardown() {
-    console.log('teardown will still be called after test.abort()');
+    console.log(`Finished spike test with ENV: ${JSON.stringify(__ENV, null, 2)} at: ${new Date()}`)
 }
