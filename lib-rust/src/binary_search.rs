@@ -1,26 +1,13 @@
-use std::collections::HashMap;
-
 use jni::objects::AutoElements;
 
 pub fn search_multiple(
     sorted_arr: AutoElements<i32>,
     numbers_to_find: AutoElements<i32>,
 ) -> Vec<i32> {
-    let mut found_indexes = HashMap::<i32, i32>::new();
     let tree = BinarySearchTree::new(sorted_arr);
     numbers_to_find
         .iter()
-        .map(|n| {
-            let x = match found_indexes.get(n) {
-                Some(data) => *data,
-                None => {
-                    let index = tree.search(n).unwrap_or(-1);
-                    found_indexes.insert(*n, index);
-                    index
-                }
-            };
-            x
-        })
+        .map(|n| tree.search(n).unwrap_or(-1))
         .collect()
 }
 

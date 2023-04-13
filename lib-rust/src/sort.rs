@@ -183,7 +183,8 @@ mod test {
         let mut env = VM.attach_current_thread_as_daemon().unwrap();
         if let Ok(arr) = env.new_int_array(5) {
             unsafe {
-                if let Ok(mut arr) = env.get_array_elements_critical(&arr, ReleaseMode::NoCopyBack) {
+                if let Ok(mut arr) = env.get_array_elements_critical(&arr, ReleaseMode::NoCopyBack)
+                {
                     arr[0] = 5;
                     arr[1] = 2;
                     arr[2] = 10;
@@ -202,7 +203,8 @@ mod test {
         let mut env = VM.attach_current_thread_as_daemon().unwrap();
         if let Ok(arr) = env.new_int_array(4) {
             unsafe {
-                if let Ok(mut arr) = env.get_array_elements_critical(&arr, ReleaseMode::NoCopyBack) {
+                if let Ok(mut arr) = env.get_array_elements_critical(&arr, ReleaseMode::NoCopyBack)
+                {
                     arr[0] = 5;
                     arr[1] = 2;
                     arr[2] = 10;
