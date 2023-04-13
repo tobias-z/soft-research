@@ -21,9 +21,22 @@ export let options = {
     ],
 }
 
-const body = new SharedArray('some name', function() {
-    return parse(open(`/${__ENV.HOME}/tests/documents/${__ENV.TEST_AMOUNT}.txt`));
-});
+const arr = parse(open(`/${__ENV.HOME}/tests/documents/${__ENV.TEST_AMOUNT}.txt`))
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
+let numbersToFind = [];
+for (let i = 0; i < Number(__ENV.SEARCH_AMOUNT); i++) {
+    const index = getRandomInt(arr.length - 1);
+    numbersToFind.push(arr[index]);
+}
+
+const body = {
+    sortedArray: arr,
+    numbersToFind
+}
 
 function parse(text) {
     return text.split("\n").map(Number);
